@@ -1,0 +1,17 @@
+{
+  "name": "jngm.net-website",
+  "version": "1.0.0",
+  "description": "Website solution for my personal blog",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [],
+  "author": "Andrea James <roceal31@gmail.com>",
+  "dependencies": {
+    "parcel": "^2.3.2"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.3.2"
+  }
+}

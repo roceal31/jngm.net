@@ -128,3 +128,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# 11ty output
+_site/**
+
+# Misc MacOS
+**/.DS_Store
