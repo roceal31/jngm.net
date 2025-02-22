@@ -1,14 +1,9 @@
 # Because I Only Work on This Every Six Months #
 
-I'm trying to rewrite my website using [11ty](https://www.11ty.dev/docs/getting-started/). Site components thus far:
+FFS now I'm abandoning this and trying to set up a basic blog with [Astro](https://docs.astro.build/en/getting-started/).
 
- * [SASS](https://sass-lang.com/guide)
- * Templates are in straight up HTML 5
+Will I ever get it together and just get something going again? Only the Flying Spaghetti  Monster knows.
 
-## To Do The Thing ##
+For now this is going to clean out everything I did before and will just follow the Astro Build a Blog tutorial.
 
-See it in action with:
-
-```npx @11ty/eleventy --serve```
-
-Site should then be accessible on http://localhost:8080
+Maybe in six years I will write a fucking  blog post, only time will tell.
