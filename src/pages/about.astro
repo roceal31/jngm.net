@@ -1,4 +1,6 @@
 ---
+import Nav from '../components/Nav.astro';
+import  Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 const pageTitle = "About Me";
@@ -34,11 +36,7 @@ const textCase = 'uppercase';
         </style>
 	</head>
 	<body>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about">About JNGM</a>
-            <a href="/blog">Blog</a>
-        </nav>
+        <Nav />
 		<h1>{pageTitle}</h1>
 		<p>Here is some abouty stuff. Because I can never completely follow a tutorial exactly,
             I'm making this paragraph up off the cuff.
@@ -58,5 +56,7 @@ const textCase = 'uppercase';
         {finished && <p>I finished this tutorial!</p>}
 
         {goal === 3 ? <p>My goal is to finish in {goal} days.</p> : <p>I have a goal that is not 3 days. It is {goal}.</p>}
+
+        <Footer />
 	</body>
 </html>

@@ -1,6 +1,9 @@
 ---
+import Nav from '../components/Nav.astro';
+import  Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
+const pageTitle = 'Home';
 ---
 
 <html lang="en">
@@ -9,15 +12,11 @@ import '../styles/global.css';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Japanese New-Girl Monkey</title>
+		<title>Japanese New-Girl Monkey | {pageTitle}</title>
 	</head>
 	<body>
-		<nav>
-            <a href="/">Home</a>
-            <a href="/about">About JNGM</a>
-            <a href="/blog">Blog</a>
-        </nav>
+		<Nav />
 		<h1>Japanese New-Girl Monkey</h1>
-		<p>Hello, world!</p>
+		<Footer />
 	</body>
 </html>

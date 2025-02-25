@@ -1,0 +1,15 @@
+---
+const networks = [
+    {
+        platform: 'GitHub',
+        url: 'https://github.com/roceal31/'
+    },
+    {
+        platform: 'Mastodon',
+        url: 'https://aus.social/@Roceal'
+    }
+];
+---
+<footer>
+    <p>The socials: {networks.map((nw) => <a href={`${nw.url}`}>{nw.platform}</a> <span>&middot; </span> )}</p>
+</footer>
