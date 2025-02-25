@@ -1,4 +1,5 @@
 ---
+import Social from './Social.astro';
 const networks = [
     {
         platform: 'GitHub',
@@ -11,5 +12,14 @@ const networks = [
 ];
 ---
 <footer>
-    <p>The socials: {networks.map((nw) => <a href={`${nw.url}`}>{nw.platform}</a> <span>&middot; </span> )}</p>
+    <p>This website is &copy; 2025 Andrea Roceal James</p>
+    <p>The socials: {networks.map((nw) => <Social platform={nw.platform} url={nw.url} />)}</p>
 </footer>
+
+<style>
+    footer {
+        display:flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+</style>
