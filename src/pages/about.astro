@@ -1,5 +1,14 @@
 ---
+const pageTitle = "About Me";
 
+const identity = {
+    firstName: "Andrea",
+    country: "Australia",
+    occupation: "DevOps Engineer",
+    hobbies: [ "spinning", "knitting", "reading", "music" ]
+};
+
+const skills  = [ "HTML", "CSS", "JavaScript", "Astro", "Cooking" ];
 ---
 
 <html lang="en">
@@ -8,7 +17,7 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Japanese New-Girl Monkey | About</title>
+		<title>Japanese New-Girl Monkey | {pageTitle}</title>
 	</head>
 	<body>
         <nav>
@@ -16,9 +25,19 @@
             <a href="/about">About JNGM</a>
             <a href="/blog">Blog</a>
         </nav>
-		<h1>About This Site</h1>
+		<h1>{pageTitle}</h1>
 		<p>Here is some abouty stuff. Because I can never completely follow a tutorial exactly,
             I'm making this paragraph up off the cuff.
         </p>
+        <h2>List of facts</h2>
+        <p>Here are a few facts about me:</p>
+        <ul>
+            <li>My name is: {identity.firstName}</li>
+            <li>I live in {identity.country} and I work as a {identity.occupation}</li>
+        </ul>
+        <p>My skills are:</p>
+        <ul>
+            {skills.map((s) => <li>{s}</li>)}
+        </ul>
 	</body>
 </html>
