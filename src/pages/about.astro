@@ -13,6 +13,10 @@ const skills  = [ "HTML", "CSS", "JavaScript", "Astro", "Cooking" ];
 const happy = true;
 const finished = false;
 const goal = 3;
+
+const skillColor = 'navy';
+const fontWeight = 'bold';
+const textCase = 'uppercase';
 ---
 
 <html lang="en">
@@ -22,6 +26,10 @@ const goal = 3;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Japanese New-Girl Monkey | {pageTitle}</title>
+        <style define:vars={{skillColor, fontWeight, textCase}}>
+            h1 { color: purple; font-size: 4rem; }
+            li.skill { color: var(--skillColor); font-weight: var(--fontWeight); text-transform: var(--textCase); }
+        </style>
 	</head>
 	<body>
         <nav>
@@ -41,7 +49,7 @@ const goal = 3;
         </ul>
         <p>My skills are:</p>
         <ul>
-            {skills.map((s) => <li>{s}</li>)}
+            {skills.map((s) => <li class="skill">{s}</li>)}
         </ul>
         {happy && <p>I am happy to be learning about Astro!</p>}
 
