@@ -1,24 +1,10 @@
 ---
-import Header from '../components/Header.astro';
-import  Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const pageTitle = 'Japanese New-Girl Monkey';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-	</head>
-	<body>
-		<Header pageTitle={pageTitle} />
-		<Footer />
-		<script>
-		  import '../scripts/menu.js';
-		</script>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+	<h2>Just Monkeying Around</h2>
+	<p>Hello, this is my website.</p>
+</BaseLayout>

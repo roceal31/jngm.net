@@ -1,7 +1,5 @@
 ---
-import Header from '../components/Header.astro';
-import  Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const pageTitle = "About JNGM";
 
@@ -23,41 +21,23 @@ const fontWeight = 'bold';
 const textCase = 'uppercase';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Japanese New-Girl Monkey | {pageTitle}</title>
-        <style define:vars={{skillColor, fontWeight, textCase}}>
-            li.skill { color: var(--skillColor); font-weight: var(--fontWeight); text-transform: var(--textCase); }
-        </style>
-	</head>
-	<body>
-        <Header pageTitle={pageTitle} />
-		<p>Here is some abouty stuff. Because I can never completely follow a tutorial exactly,
-            I'm making this paragraph up off the cuff.
-        </p>
-        <h2>List of facts</h2>
-        <p>Here are a few facts about me:</p>
-        <ul>
-            <li>My name is: {identity.firstName}</li>
-            <li>I live in {identity.country} and I work as a {identity.occupation}</li>
-        </ul>
-        <p>My skills are:</p>
-        <ul>
-            {skills.map((s) => <li class="skill">{s}</li>)}
-        </ul>
-        {happy && <p>I am happy to be learning about Astro!</p>}
+<BaseLayout pageTitle={pageTitle}>
+    <p>Here is some abouty stuff. Because I can never completely follow a tutorial exactly,
+        I'm making this paragraph up off the cuff.
+    </p>
+    <h2>List of facts</h2>
+    <p>Here are a few facts about me:</p>
+    <ul>
+        <li>My name is: {identity.firstName}</li>
+        <li>I live in {identity.country} and I work as a {identity.occupation}</li>
+    </ul>
+    <p>My skills are:</p>
+    <ul>
+        {skills.map((s) => <li class="skill">{s}</li>)}
+    </ul>
+    {happy && <p>I am happy to be learning about Astro!</p>}
 
-        {finished && <p>I finished this tutorial!</p>}
+    {finished && <p>I finished this tutorial!</p>}
 
-        {goal === 3 ? <p>My goal is to finish in {goal} days.</p> : <p>I have a goal that is not 3 days. It is {goal}.</p>}
-
-        <Footer />
-        <script>
-            import '../scripts/menu.js';
-        </script>  
-	</body>
-</html>
+    {goal === 3 ? <p>My goal is to finish in {goal} days.</p> : <p>I have a goal that is not 3 days. It is {goal}.</p>}
+</BaseLayout>
