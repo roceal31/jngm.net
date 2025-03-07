@@ -1,0 +1,25 @@
+---
+import Social from './Social.astro';
+const networks = [
+    {
+        platform: 'GitHub',
+        url: 'https://github.com/roceal31/'
+    },
+    {
+        platform: 'Mastodon',
+        url: 'https://aus.social/@Roceal'
+    }
+];
+---
+<footer>
+    <p>This website is &copy; 2025 Andrea Roceal James</p>
+    <p>The socials: {networks.map((nw) => <Social platform={nw.platform} url={nw.url} />)}</p>
+</footer>
+
+<style>
+    footer {
+        display:flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+</style>
