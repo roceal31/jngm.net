@@ -1,10 +1,12 @@
 ---
 import Nav from './Nav.astro';
+import Hamburger from './Hamburger.astro';
 
 const { pageTitle } = Astro.props;
 ---
 
 <header>
+    <Hamburger />
     <Nav />
     <h1>{pageTitle}</h1>
 </header>
