@@ -1,10 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
+import Greeting from '../components/Greeting';
 const pageTitle = 'Japanese New-Girl Monkey';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
 	<h2>Just Monkeying Around</h2>
 	<p>Hello, this is my website.</p>
+	<Greeting client:load messages={['Your mother is a hamster and your father smells of elderberries', 
+		'Mathematical',
+		'Nolite te bastardes carborundorum',
+		'Bore da'
+	]}  />
 </BaseLayout>
