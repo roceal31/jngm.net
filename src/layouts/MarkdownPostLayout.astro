@@ -1,0 +1,16 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import TagList from "../components/TagList.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+
+	<p>Written by {frontmatter.author}</p>
+	<p>Published on: {frontmatter.pubDate}</p>
+
+	<slot />
+
+	<TagList tags={frontmatter.tags} />
+</BaseLayout>

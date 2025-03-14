@@ -22,3 +22,7 @@ And I have run the `create astro` command:
 To host the site in dev mode  use:
 
 ```yarn run dev```
+
+To build the site use:
+
+```yarn run build```
