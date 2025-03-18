@@ -3,12 +3,18 @@ import BaseLayout from "./BaseLayout.astro";
 import TagList from "../components/TagList.astro";
 
 const { frontmatter } = Astro.props;
+
+const formatDate = (dateTimeObj: Date) => {
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	const days  = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	return `${days[dateTimeObj.getDay()]} ${dateTimeObj.getDate()} ${months[dateTimeObj.getMonth()]} ${dateTimeObj.getFullYear()}`;
+}
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
 
 	<p>Written by {frontmatter.author}</p>
-	<p>Published on: {frontmatter.pubDate}</p>
+	<p>Published on: { formatDate(frontmatter.pubDate) }</p>
 
 	<slot />
 

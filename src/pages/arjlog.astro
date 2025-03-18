@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPost from '../components/BlogPost.astro';
+import { getCollection } from "astro:content";
 
-const blogPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+const blogPosts = await getCollection("blog");
 const pageTitle = 'Blog';
 ---
 
@@ -10,6 +11,6 @@ const pageTitle = 'Blog';
 	<p>Look at me, I'm using a layout now. No more code duplication, and this list is dynamically generated! &#x1F389;</p>
 
 	<ul>
-		{ blogPosts.map((post: any) => <BlogPost url={post.url} title={post.frontmatter.title} description={post.frontmatter.description} />) }
+		{ blogPosts.map((post: any) => <BlogPost url={`/posts/${post.id}/`} title={post.data.title} description={post.data.description} />) }
 	</ul>
 </BaseLayout>
