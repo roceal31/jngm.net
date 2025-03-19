@@ -1,0 +1,12 @@
+html {
+    background-color: #CCFFEE;
+    display: flex;
+    flex-direction: column;
+    height:100vh;
+}
+
+body {
+    border: 80px solid #FFE;
+    margin:0;
+    flex-grow: 1;
+}
