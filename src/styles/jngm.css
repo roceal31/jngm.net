@@ -9,4 +9,30 @@ body {
     border: 80px solid #FFE;
     margin:0;
     flex-grow: 1;
+    position:relative;
+}
+
+header {
+    position:fixed;
+    top:0;
+    left:0;
+    background-color: #AADDCC;
+    width:160px;
+    height:160px;
+    z-index:0;
+}
+
+header h1.page-title {
+    position: fixed;
+    left: 80px;
+    width:100%;
+}
+
+section.main {
+    position: relative;
+    padding:40px;
+}
+
+h1 {
+    font-size: 2.8rem;
 }
