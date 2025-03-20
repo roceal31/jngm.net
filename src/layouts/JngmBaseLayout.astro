@@ -1,6 +1,7 @@
 ---
 import '../styles/jngm.css';
 import JngmHeader from '../components/JngmHeader.astro';
+import JngmNav from '../components/JngmNav.astro';
 const { metaTitle, pageTitle } = Astro.props;
 ---
 <html lang="en">
@@ -11,6 +12,7 @@ const { metaTitle, pageTitle } = Astro.props;
     </head>
     <body>
         <JngmHeader pageTitle={pageTitle} />
+        <JngmNav />
         <section class="main">
             <slot />
         </section>
