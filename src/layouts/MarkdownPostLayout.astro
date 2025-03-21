@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
+import JngmBaseLayout from "./JngmBaseLayout.astro";
 import TagList from "../components/TagList.astro";
 
 const { frontmatter } = Astro.props;
@@ -11,7 +11,7 @@ const formatDate = (dateTimeObj: Date) => {
 }
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
+<JngmBaseLayout pageTitle={frontmatter.title}>
 
 	<p>Written by {frontmatter.author}</p>
 	<p>Published on: { formatDate(frontmatter.pubDate) }</p>
@@ -19,4 +19,4 @@ const formatDate = (dateTimeObj: Date) => {
 	<slot />
 
 	<TagList tags={frontmatter.tags} />
-</BaseLayout>
+</JngmBaseLayout>

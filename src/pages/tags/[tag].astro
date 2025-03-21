@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/JngmBaseLayout.astro';
 import BlogPost from '../../components/BlogPost.astro';
 import { getCollection } from "astro:content";
 
@@ -20,9 +20,9 @@ export async function getStaticPaths() {
 const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
-<BaseLayout pageTitle={tag}>
+<BaseLayout pageTitle={tag} metaTitle={`Posts by tag ${tag}`}>
   <p>Posts tagged with {tag}</p>
   <ul>
-    { posts.map((post: any) => <BlogPost url={`/posts/${post.id}/`} title={post.data.title} description={post.data.description} />)}
+    { posts.map((post: any) => <BlogPost post={post} />)}
   </ul>
 </BaseLayout>

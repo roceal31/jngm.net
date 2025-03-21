@@ -1,4 +1,16 @@
 ---
-const { url, title, description} = Astro.props;
+import TagList from "../components/TagList.astro";
+const { post } = Astro.props;
+
+const formatDate = (dateTimeObj: Date) => {
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	const days  = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	return `${days[dateTimeObj.getDay()]} ${dateTimeObj.getDate()} ${months[dateTimeObj.getMonth()]} ${dateTimeObj.getFullYear()}`;
+}
 ---
-<li><a href={url}>{title}</a> - {description}</li>
+<article class="blog-post">
+    <h2 class="blog-title"><a href={`/posts/${post.id}/`}>{post.data.title}</a></h2>
+    <div class="blog-pub-date">{formatDate(post.data.pubDate)}</div>
+    <p>{post.data.description}</p>
+    <TagList tags={post.data.tags} />
+</article>

@@ -1,43 +1,31 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import JngmBaseLayout from "../layouts/JngmBaseLayout.astro";
 
-const pageTitle = "About JNGM";
-
-const identity = {
-    firstName: "Andrea",
-    country: "Australia",
-    occupation: "DevOps Engineer",
-    hobbies: [ "spinning", "knitting", "reading", "music" ]
-};
-
-const skills  = [ "HTML", "CSS", "JavaScript", "Astro", "Cooking" ];
-
-const happy = true;
-const finished = true;
-const goal = 3;
-
-const skillColor = 'navy';
-const fontWeight = 'bold';
-const textCase = 'uppercase';
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-    <p>Here is some abouty stuff. Because I can never completely follow a tutorial exactly,
-        I'm making this paragraph up off the cuff.
+<JngmBaseLayout pageTitle="About JNGM" metaTitle="About" >
+    <p>At some point around when I was six years old, I received a small plush toy monkey. I no longer remember
+        who gave me the monkey or for what reason, but despite having a pretty basic approach to naming most of
+        my other stuffed animals (there was, for example, an "Owlie", and a "Bear", and a few other some such),
+        this particular new friend was instantly named "Japanese New-Girl Monkey".
     </p>
-    <h2>List of facts</h2>
-    <p>Here are a few facts about me:</p>
-    <ul>
-        <li>My name is: {identity.firstName}</li>
-        <li>I live in {identity.country} and I work as a {identity.occupation}</li>
-    </ul>
-    <p>My skills are:</p>
-    <ul>
-        {skills.map((s) => <li class="skill">{s}</li>)}
-    </ul>
-    {happy && <p>I am happy to be learning about Astro!</p>}
-
-    {finished && <p>I finished this tutorial!</p>}
-
-    {goal === 3 ? <p>My goal is to finish in {goal} days.</p> : <p>I have a goal that is not 3 days. It is {goal}.</p>}
-</BaseLayout>
+    <p>Why, I don't know.</p>
+    <p>Sometime in 2001 I had moved out on my own after receiving my BS in Computer Science and began putting to
+        commercial use all the hours I'd spent mucking around with HTML tables and viewing the source of websites
+        I thought were interesting. I lived in a fairly remote town in western Washington, on Whidbey Island,
+        and there wasn't a whole lot going on in my social life - which was kind of the way I liked it anyway.
+    </p>
+    <p>Wouldn't it be cool, I thought, to set up my very own website. Not like one of those GeoCities or MySpace
+        things. A <em>real</em> website where I registered my own domain name, and everything. But what domain
+        name? I plucked the most random but still self-representative thing I could think of, and the weblog
+        hosted at <a href="http://www.jngm.net/arglog">http://www.jngm.net/arjlog</a> was shortly thereafter up and running, on a beige box PC sitting in
+        my living room, running Debian.
+    </p>
+    <p>The blogging experiments continued a good number of years afterwards, with new iterations, and even an
+        additional domain. They petered out once my career got lively, and then pretty much died altogether after
+        the birth of my twins, which was a long, dark tunnel of sleep deprivation and overwhelm from which I am
+        only just emerging, blinking and staggering, some eleven years later.
+    </p>
+    <p>I kept the domains the whole time, though.</p>
+    <p>And now I'm ready to play on the web again. At least until the next major life change wallops me.</p>
+</JngmBaseLayout>
