@@ -1,8 +1,17 @@
+@font-face {
+    font-family: "CaroniTabanca";
+    src: url('/assets/CaroniTabanca/font.woff2') format('woff2'), url('/assets/CaroniTabanca/font.woff') format('woff');
+}  
+
 html {
     background-color: #CCFFEE;
     display: flex;
     flex-direction: column;
     height:100vh;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #303030;
+    line-height: 250%;
 }
 
 body {
@@ -13,9 +22,9 @@ body {
 }
 
 header {
-    position:fixed;
-    top:0;
-    left:0;
+    position:absolute;
+    top:-80px;
+    left:-80px;
     background-color: #AADDCC;
     width:160px;
     height:160px;
@@ -23,14 +32,16 @@ header {
 }
 
 header h1.page-title {
-    position: fixed;
+    font-family: 'CaroniTabanca', sans-serif;
+    font-size:60px;
+    position: absolute;
     left: 80px;
-    width:100%;
+    width:calc(100vw - 80px);
 }
 
 section.main {
     position: relative;
-    padding:40px;
+    padding:40px 40px 80px;
     font-size: 1.5rem;
 }
 
@@ -41,7 +52,9 @@ nav.site-nav {
     height:160px;
     width: calc(100vw - 160px);
     margin-left:80px;
-    font-size:1.8rem;
+    z-index: 2;
+    font-family: 'CaroniTabanca', sans-serif;
+    font-size: 2.5rem;
 }
 
 .site-nav ul {
@@ -62,6 +75,18 @@ nav.site-nav {
     text-align: center;
 }
 
+.site-nav li a {
+    color: #303030;
+}
+
 h1 {
-    font-size: 2.8rem;
+    font-size: 2.6rem;
+}
+
+h2 {
+    font-size:2.3rem;
+}
+
+h3 {
+    font-size:2rem;
 }
