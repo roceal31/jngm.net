@@ -1,16 +1,30 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import JngmBaseLayout from '../layouts/JngmBaseLayout.astro';
 import BlogPost from '../components/BlogPost.astro';
 import { getCollection } from "astro:content";
 
 const blogPosts = await getCollection("blog");
-const pageTitle = 'Blog';
+const fiveLatest = blogPosts.sort((pa, pb) => { 
+	var a = pa.data.pubDate.getTime();
+	var b = pb.data.pubDate.getTime();
+
+	if(a > b) return  -1;
+	if(a === b) return 0;
+	return 1;
+}).reverse().slice(0, 4);
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-	<p>Look at me, I'm using a layout now. No more code duplication, and this list is dynamically generated! &#x1F389;</p>
-
-	<ul>
-		{ blogPosts.map((post: any) => <BlogPost url={`/posts/${post.id}/`} title={post.data.title} description={post.data.description} />) }
-	</ul>
-</BaseLayout>
+<JngmBaseLayout pageTitle="ARJLog" metaTitle="ARJLog">
+	<section class="blog-layout">
+		<section class="blog-sidebar">
+			<nav class="blog-nav">
+				<p><a href="/archive">Archive</a></p>
+				<p><a href="/tags">Posts by tag</a></p>
+				<p><a  href="https://aus.social/@Roceal">Mastodon blather</a></p>
+			</nav>
+		</section>
+		<section class="blog-listing">
+		{ fiveLatest.map((post: any) => <BlogPost post={post} />) }
+		</section>
+	</section>
+</JngmBaseLayout>

@@ -1,0 +1,131 @@
+@font-face {
+    font-family: "CaroniTabanca";
+    src: url('/assets/CaroniTabanca/font.woff2') format('woff2'), url('/assets/CaroniTabanca/font.woff') format('woff');
+}
+
+h1 {
+    font-size: 2.6rem;
+}
+
+h2 {
+    font-size:2.3rem;
+}
+
+h3 {
+    font-size:2rem;
+}
+
+a {
+    color: #223366;
+}
+
+a:visited {
+    color: #442266;
+}
+html {
+    background-color: #CCFFEE;
+    display: flex;
+    flex-direction: column;
+    height:100vh;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #303030;
+    line-height: 250%;
+}
+
+body {
+    border: 80px solid #FFE;
+    margin:0;
+    flex-grow: 1;
+    position:relative;
+}
+
+header {
+    position:absolute;
+    top:-80px;
+    left:-80px;
+    background-color: #AADDCC;
+    width:160px;
+    height:160px;
+    z-index:0;
+}
+
+header h1.page-title {
+    font-family: 'CaroniTabanca', sans-serif;
+    font-size:60px;
+    position: absolute;
+    left: 80px;
+    width:calc(100vw - 80px);
+}
+
+section.main {
+    position: relative;
+    padding:40px 40px 80px;
+    font-size: 1.5rem;
+}
+
+nav.site-nav {
+    position: fixed;
+    bottom:0;
+    background-color: #AADDCC;
+    height:160px;
+    width: calc(100vw - 160px);
+    margin-left:80px;
+    z-index: 2;
+    font-family: 'CaroniTabanca', sans-serif;
+    font-size: 2.5rem;
+}
+
+.site-nav ul {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin:0;
+    padding:0;
+    list-style: none;
+    width: 100%;
+    height:100%;
+}
+
+.site-nav li {
+    display:block;
+    flex-grow:1;
+    text-align: center;
+}
+
+.site-nav li a {
+    color: #303030;
+}
+
+section.blog-layout {
+    display:flex;
+    flex-flow: row;
+}
+
+section.blog-sidebar {
+    flex-grow: 1;
+}
+
+section.blog-listing {
+    flex-grow: 3;
+}
+
+.blog-pub-date {
+    font-size:smaller;
+    letter-spacing: .1em;
+}
+
+div.tags {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+p.tag {
+    margin:0 4px 0 0;
+    padding:4px 8px;
+    display:block;
+    background-color: #AADDCC;
+    border:1px solid #CCFFEE;
+    border-radius: 0.2em;
+}
