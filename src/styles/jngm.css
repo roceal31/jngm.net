@@ -1,8 +1,27 @@
 @font-face {
     font-family: "CaroniTabanca";
     src: url('/assets/CaroniTabanca/font.woff2') format('woff2'), url('/assets/CaroniTabanca/font.woff') format('woff');
-}  
+}
 
+h1 {
+    font-size: 2.6rem;
+}
+
+h2 {
+    font-size:2.3rem;
+}
+
+h3 {
+    font-size:2rem;
+}
+
+a {
+    color: #223366;
+}
+
+a:visited {
+    color: #442266;
+}
 html {
     background-color: #CCFFEE;
     display: flex;
@@ -79,14 +98,34 @@ nav.site-nav {
     color: #303030;
 }
 
-h1 {
-    font-size: 2.6rem;
+section.blog-layout {
+    display:flex;
+    flex-flow: row;
 }
 
-h2 {
-    font-size:2.3rem;
+section.blog-sidebar {
+    flex-grow: 1;
 }
 
-h3 {
-    font-size:2rem;
+section.blog-listing {
+    flex-grow: 3;
+}
+
+.blog-pub-date {
+    font-size:smaller;
+    letter-spacing: .1em;
+}
+
+div.tags {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+p.tag {
+    margin:0 4px 0 0;
+    padding:4px 8px;
+    display:block;
+    background-color: #AADDCC;
+    border:1px solid #CCFFEE;
+    border-radius: 0.2em;
 }

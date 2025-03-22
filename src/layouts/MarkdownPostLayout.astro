@@ -11,12 +11,10 @@ const formatDate = (dateTimeObj: Date) => {
 }
 ---
 
-<JngmBaseLayout pageTitle={frontmatter.title}>
-
-	<p>Written by {frontmatter.author}</p>
-	<p>Published on: { formatDate(frontmatter.pubDate) }</p>
-
-	<slot />
-
-	<TagList tags={frontmatter.tags} />
+<JngmBaseLayout pageTitle={frontmatter.title} metaTitle={frontmatter.title}>
+	<article class="blog-post">
+		<div class="blog-pub-date">{formatDate(frontmatter.pubDate)}</div>
+		<slot />
+		<TagList tags={frontmatter.tags} />
+	</article>
 </JngmBaseLayout>
