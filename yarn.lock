@@ -1273,6 +1273,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"arjlog@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "arjlog@workspace:."
+  dependencies:
+    "@astrojs/preact": "npm:^4.0.5"
+    "@astrojs/rss": "npm:^4.0.11"
+    astro: "npm:5.5.2"
+    preact: "npm:^10.26.4"
+  languageName: unknown
+  linkType: soft
+
 "array-iterate@npm:^2.0.0":
   version: 2.0.1
   resolution: "array-iterate@npm:2.0.1"
@@ -4018,17 +4029,6 @@ __metadata:
   checksum: 10c0/09270dc4f30d479e666aee820eacd9e464215cdff53848b443964202bf4051490538e5dd1b42e1a65cf7296916ca17640aebf63dae9812749c7542ee5f288dec
   languageName: node
   linkType: hard
-
-"src-blog@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "src-blog@workspace:."
-  dependencies:
-    "@astrojs/preact": "npm:^4.0.5"
-    "@astrojs/rss": "npm:^4.0.11"
-    astro: "npm:5.5.2"
-    preact: "npm:^10.26.4"
-  languageName: unknown
-  linkType: soft
 
 "ssri@npm:^12.0.0":
   version: 12.0.0

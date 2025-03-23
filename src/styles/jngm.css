@@ -104,11 +104,11 @@ section.blog-layout {
 }
 
 section.blog-sidebar {
-    flex-grow: 1;
+    flex:1 1 30%;
 }
 
 section.blog-listing {
-    flex-grow: 3;
+    flex:2 1 70%;
 }
 
 .blog-pub-date {
@@ -119,6 +119,7 @@ section.blog-listing {
 div.tags {
     display:flex;
     flex-wrap: wrap;
+    margin-bottom:5px;
 }
 
 p.tag {

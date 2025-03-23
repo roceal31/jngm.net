@@ -1,7 +1,8 @@
 {
-  "name": "src-blog",
+  "name": "arjlog",
+  "license": "CC-BY-NC-ND-4.0",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

@@ -1,5 +1,5 @@
 ---
-import JngmBaseLayout from '../layouts/JngmBaseLayout.astro';
+import ArjLogBaseLayout from '../layouts/ArjLogBaseLayout.astro';
 import BlogPost from '../components/BlogPost.astro';
 import { getCollection } from "astro:content";
 
@@ -14,17 +14,6 @@ const fiveLatest = blogPosts.sort((pa, pb) => {
 }).reverse().slice(0, 4);
 ---
 
-<JngmBaseLayout pageTitle="ARJLog" metaTitle="ARJLog">
-	<section class="blog-layout">
-		<section class="blog-sidebar">
-			<nav class="blog-nav">
-				<p><a href="/archive">Archive</a></p>
-				<p><a href="/tags">Posts by tag</a></p>
-				<p><a  href="https://aus.social/@Roceal" rel="me">Mastodon blather</a></p>
-			</nav>
-		</section>
-		<section class="blog-listing">
-		{ fiveLatest.map((post: any) => <BlogPost post={post} />) }
-		</section>
-	</section>
-</JngmBaseLayout>
+<ArjLogBaseLayout pageTitle="ARJLog" metaTitle="ARJLog">
+	{ fiveLatest.map((post: any) => <BlogPost post={post} />) }
+</ArjLogBaseLayout>
