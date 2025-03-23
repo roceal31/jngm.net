@@ -1,7 +1,15 @@
 ---
-import JngmBaseLayout from "../layouts/JngmBaseLayout.astro";
+import ArjLogBaseLayout from "../layouts/ArjLogBaseLayout.astro";
+import ArchiveSection from "../components/ArchiveSection.astro";
+import { getCollection } from "astro:content";
+
+const blogPosts = await getCollection("blog");
+const blogsByYear = Object.groupBy(blogPosts, ( {data} ) => data.pubDate.getFullYear());
+
 ---
 
-<JngmBaseLayout pageTitle="ARJLog - Archive" metaTitle="Archive">
-    <p>Work in progress.</p>
-</JngmBaseLayout>
+<ArjLogBaseLayout pageTitle="ARJLog - Archive" metaTitle="Archive">
+    <div class="blog-archive">
+        {Object.entries(blogsByYear).map(([key, value]) => <ArchiveSection year={key} posts={value} />)}
+    </div>
+</ArjLogBaseLayout>

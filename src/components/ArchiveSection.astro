@@ -1,0 +1,12 @@
+---
+const {year, posts} = Astro.props
+const formatDate = (dateTimeObj: Date) => {
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	const days  = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	return `${dateTimeObj.getDate()} ${months[dateTimeObj.getMonth()]}`;
+}
+
+---
+
+<h3>{year}</h3>
+{posts.map((post: any) => <p>{formatDate(post.data.pubDate)} <a href={`/posts/${post.id}/`}>{post.data.title}</a></p>)}
