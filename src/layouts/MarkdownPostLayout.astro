@@ -1,5 +1,5 @@
 ---
-import JngmBaseLayout from "./JngmBaseLayout.astro";
+import ArjLogBaseLayout from "./ArjLogBaseLayout.astro";
 import TagList from "../components/TagList.astro";
 
 const { frontmatter } = Astro.props;
@@ -11,10 +11,10 @@ const formatDate = (dateTimeObj: Date) => {
 }
 ---
 
-<JngmBaseLayout pageTitle={frontmatter.title} metaTitle={frontmatter.title}>
+<ArjLogBaseLayout pageTitle={frontmatter.title} metaTitle={frontmatter.title}>
 	<article class="blog-post">
 		<div class="blog-pub-date">{formatDate(frontmatter.pubDate)}</div>
 		<slot />
 		<TagList tags={frontmatter.tags} />
 	</article>
-</JngmBaseLayout>
+</ArjLogBaseLayout>

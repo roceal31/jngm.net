@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/JngmBaseLayout.astro';
+import ArjLogBaseLayout from '../../layouts/ArjLogBaseLayout.astro';
 import BlogPost from '../../components/BlogPost.astro';
 import { getCollection } from "astro:content";
 
@@ -19,10 +19,15 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
+
+const convertToTitleCase = function(someString: string) {
+  let result = someString[0].toUpperCase() + someString.substring(1).toLowerCase();
+  return result;
+};
+
+
 ---
-<BaseLayout pageTitle={tag} metaTitle={`Posts by tag ${tag}`}>
-  <p>Posts tagged with {tag}</p>
-  <ul>
-    { posts.map((post: any) => <BlogPost post={post} />)}
-  </ul>
-</BaseLayout>
+<ArjLogBaseLayout pageTitle={convertToTitleCase(tag)} metaTitle={`Posts by tag: ${tag}`}>
+  <p>All posts tagged with <q>{tag}</q></p>
+  { posts.map((post: any) => <BlogPost post={post} />)}
+</ArjLogBaseLayout>

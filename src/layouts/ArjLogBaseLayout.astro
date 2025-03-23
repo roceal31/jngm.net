@@ -1,0 +1,19 @@
+---
+import JngmBaseLayout from '../layouts/JngmBaseLayout.astro';
+const { metaTitle, pageTitle } = Astro.props;
+---
+
+<JngmBaseLayout metaTitle={metaTitle} pageTitle={pageTitle}>
+    <section class="blog-layout">
+		<section class="blog-sidebar">
+			<nav class="blog-nav">
+				<p><a href="/archive">Archive</a></p>
+				<p><a href="/tags">Posts by tag</a></p>
+				<p><a  href="https://aus.social/@Roceal" rel="me">Mastodon blather</a></p>
+			</nav>
+		</section>
+		<section class="blog-listing">
+            <slot />
+		</section>
+	</section>
+</JngmBaseLayout>
