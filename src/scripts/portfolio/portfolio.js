@@ -1,7 +1,11 @@
+import { isRenderInstance } from "astro/runtime/server/render/common.js";
+
 var loader;
 var canvas = document.getElementById('game-map');
-canvas.setAttribute('width', $(canvas).css('min-width').replace(/\D/g, ''));
-canvas.setAttribute('height', $(canvas).css('min-height').replace(/\D/g, ''));
+console.log('Canvas loaded', canvas);
+
+canvas.setAttribute('width', 100);
+canvas.setAttribute('height', 100);
 var context = canvas ? canvas.getContext('2d') : null;
 
 var currentGame;
@@ -10,6 +14,60 @@ var requestAnimFrame = window.requestAnimationFrame ||
 	window.webkitRequestAnimationFrame ||
 	window.msRequestAnimationFrame ||
 	window.mozRequestAnimationFrame;
+
+function initGame() {
+	loader = document.querySelector('#loading-screen');
+	if(loader && !loader.checkVisibility()) {
+        loader.style.display = 'block';
+		document.documentElement.addEventListener('keypress', handleLoadingKeypress);
+		document.documentElement.addEventListener('keydown', handleLoadingKeypress);
+	}
+}
+
+function handleLoadingKeypress(eventObject) {
+    console.log('handleLoadingKeypress', eventObject);
+	var key = eventObject.which;
+
+	if(key === 27) { 
+		//loadResume();
+	}
+
+	if(key === 13) {
+		loadGame();
+	}
+}
+
+function loadGame() {
+    console.log('TODO: fix loadGame()');
+/*	jQuery.get({
+		url: '/slice/js/mapArray.json',
+		dataType: 'json',
+		success: handleMapLoad
+	});
+	$(loader).hide('scale', 600, function() {
+		$(document).off('keypress', handleLoadingKeypress);
+		$(document).off('keydown', handleLoadingKeypress);
+	});
+*/
+}
+
+function handleMapLoad(response) {
+	console.log('handleMapLoad', response);
+    if(response.status == 200) {
+        // convert body to JSON object
+        //initScene(response.body);
+    }
+}
+
+function initTooltips() {
+    // TODO: re-create bootstrap tooltip behaviour
+    /*var tooltips = document.querySelector('div[data-toggle="tooltip"]').tooltip({
+      title: formatTooltipTitle,
+      html: true,
+    });*/
+}
+
+/*
 
 // Individual hex factory function
 var hexTile = function(settings) {
@@ -134,9 +192,9 @@ var map = function(settings) {
 	var mapObj = {
 		context: settings.context,
 		grid: settings.grid,
-		/*
-		   zones array elements: see mapZone factory function
-		 */
+		
+		//zones array elements: see mapZone factory function
+		 
 		zones: [
 			mapZone({
 				id: 'forest',
@@ -152,6 +210,7 @@ var map = function(settings) {
 		     - null = empty space on the grid, default hexTile
 		     - mapTile = custom object to pass to hexTile with fill colour & zone id
 		 */
+        /*
 		mapArray: [],
 
 		init: function(zones, mapArray) {
@@ -545,33 +604,6 @@ function formatTooltipTitle() {
   return data;
 }
 
-function initTooltips() {
-  var tooltips = $('div[data-toggle="tooltip"]').tooltip({
-    title: formatTooltipTitle,
-    html: true,
-  });
-}
-
-function initGame() {
-	loader = $('#loading-screen');
-	if(loader && loader.length && !loader.is(':visible')) {
-		loader.show('scale', 800);
-		$(document).on('keypress', handleLoadingKeypress);
-		$(document).on('keydown', handleLoadingKeypress);
-	}
-}
-
-function handleLoadingKeypress(eventObject) {
-	var key = eventObject.which;
-
-	if(key === 27) { 
-		loadResume();
-	}
-
-	if(key === 13) {
-		loadGame();
-	}
-}
 
 function handleGameKeypress(eventObject) {
 	var key = eventObject.which;
@@ -605,22 +637,7 @@ function loadResume() {
 	window.location = '/slice/index.html';
 }
 
-function handleMapLoad(data, status, xhr) {
-	//console.log('handleMapLoad', data);
-	initScene(data.mapArray);
-}
 
-function loadGame() {
-	jQuery.get({
-		url: '/slice/js/mapArray.json',
-		dataType: 'json',
-		success: handleMapLoad
-	});
-	$(loader).hide('scale', 600, function() {
-		$(document).off('keypress', handleLoadingKeypress);
-		$(document).off('keydown', handleLoadingKeypress);
-	});
-}
 
 function initScene(mapArray) {
 	//console.log('initScene', mapArray);
@@ -651,3 +668,19 @@ $(function() {
   	console.log('error', err);
   });
 });
+*/
+
+var ready = (callback) => {
+    if (document.readyState != "loading") callback();
+    else document.addEventListener("DOMContentLoaded", callback);
+}
+  
+ready(() => { 
+    initTooltips();
+    initGame();
+    fetch("/assets/map.json").then((data) => handleMapLoad(data))
+        .catch(error => {
+            console.log("Couldn't load map.json", error);
+        });
+});
+  
