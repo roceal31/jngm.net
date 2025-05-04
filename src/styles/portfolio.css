@@ -1,5 +1,5 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'); /* Temporarily retain old bootstrap styles */
-
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono'); /* Temporarily retain original font */
 body {
     font-family: 'Share Tech Mono' !important;
     padding-top: 45px;
