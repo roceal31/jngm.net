@@ -20,7 +20,9 @@ const hexTile = function(settings) {
 		init: function() {
 			this.calculateHexHeight();
 			this.drawHex(this.startX, this.startY);
-			//this.drawCoords(this.startX, this.startY, this.q, this.r);
+			if(this.context.debugMode) {
+				this.drawCoords(this.startX, this.startY, this.q, this.r);
+			}
 			this.screen = hexTileObj.center();
 			if(this.mapConfig.zoneId) {
 				this.zoneId = this.mapConfig.zoneId;
@@ -103,7 +105,6 @@ const hexTile = function(settings) {
 		}
 	};
 
-	//console.log('New hex tile', hexTileObj);
 	return hexTileObj;
 }
 
@@ -185,11 +186,11 @@ var hexGrid = function(context) {
 		width: 0,
 		height: 0,
 
-		init: function(mapArray) {
+		init: function(mapZones, mapArray) {
 			//console.log('hexGrid init, initialising map on canvas ', this.context.canvas);
 			this.map.context = this.context;
 			this.map.grid = this;
-			this.map.init(null, mapArray);
+			this.map.init(mapZones, mapArray);
 
 			this.width = parseInt(context.canvas.width);
 			this.height = parseInt(context.canvas.height);
@@ -219,6 +220,7 @@ var hexGrid = function(context) {
 		},
 
 		buildHexGrid: function(colStart, startX, startY, numberRows, numberCols) {
+			console.log('buildHexGrid', this.map);
 			var q = colStart, r = 0;
 			var currentX = startX, currentY = startY;
 			while(currentY < (this.height - this.hexHeightUnit)) {
@@ -295,7 +297,7 @@ var hexGrid = function(context) {
                 this.map.mapArray.length > hexTile.q &&
                 this.map.mapArray[hexTile.q].length > hexTile.r &&
                 this.map.mapArray[hexTile.q][hexTile.r];
-			//return (this.map.mapArray[hexTile.q][hexTile.r] != null);
+            
             return result;
 		},
 

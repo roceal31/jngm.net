@@ -8,11 +8,6 @@ canvas.setAttribute('width', 800);
 canvas.setAttribute('height', 600);
 var context = canvas ? canvas.getContext('2d') : null;
 
-var requestAnimFrame = window.requestAnimationFrame ||
-	window.webkitRequestAnimationFrame ||
-	window.msRequestAnimationFrame ||
-	window.mozRequestAnimationFrame;
-
 function initTooltips() {
     // TODO: re-create bootstrap tooltip behaviour
     /*var tooltips = document.querySelector('div[data-toggle="tooltip"]').tooltip({

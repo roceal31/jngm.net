@@ -5,6 +5,7 @@ const game = {
     loader: null,
     context: null,
     currentGame: null,
+
     // Main game  object factory function
     createGame: function (settings) {
         var gameObj = {
@@ -14,14 +15,14 @@ const game = {
             log: {},
             context: settings.context,
 
-            init: function (initMessage, mapArray) {
+            init: function (initMessage, mapZones, mapArray) {
                 //console.log('init game with context', this.context);
                 this.console = document.querySelector('#game-console');
                 this.log = document.querySelector('#game-log');
-                this.log.innerHtml = '<p>' + initMessage + '</p>';
+                this.log.innerHtml += '<p>' + initMessage + '</p>';
 
                 this.grid = hexGrid( this.context );
-                this.grid.init(mapArray);
+                this.grid.init(mapZones, mapArray);
 
                 this.adventurer = adventurer({
                     context: this.context,
@@ -63,7 +64,7 @@ const game = {
         }
     },
 
-    initScene: function (mapArray) {
+    initScene: function (mapZones, mapArray) {
         //console.log('initScene', mapArray);
         this.context.canvas.style.display = 'block';
         this.currentGame = this.createGame({
@@ -72,7 +73,7 @@ const game = {
     
         this.currentGame.init('You find yourself standing at a dusty crossroads. Five paths '+
             'stretch away into the distance. You suppose you must choose a direction ' +
-            'and start moving. Adventure isn\'t going to find itself!', mapArray);
+            'and start moving. Adventure isn\'t going to find itself!', mapZones, mapArray);
         
         document.documentElement.addEventListener('keydown', this.handleGameKeypress);    
         this.gameLoop();
@@ -138,7 +139,7 @@ let loadMapFile = async function() {
 
 let handleMapLoad = function(jsonData) {
     console.log('handleMapLoad', jsonData);
-    game.initScene(jsonData);
+    game.initScene(jsonData.mapZones, jsonData.mapArray);
 }
 
 export { game };
