@@ -118,7 +118,7 @@ const mapTile = function(settings) {
 }
 
 const map = function(settings) {
-	console.log('map factory');
+	console.log('map factory', settings);
 	let mapObj = {
 		context: settings.context,
 		grid: settings.grid,
@@ -128,10 +128,10 @@ const map = function(settings) {
 		zones: [
 			mapZone({
 				id: 'forest',
-				context: this.context,
+				context: settings.context,
 				title: 'The Pursuant Forest',
 				logMessage: 'Forest blah blah blah lorem ipsum dolor sit amet.',
-				image: '/slice/images/forest-sprite.png',
+				image: '/images/forest-sprite.png',
 				imageCoords: [420,24]
 			})
 		],
@@ -144,10 +144,13 @@ const map = function(settings) {
 		mapArray: [],
 
 		init: function(mapZones, mapGrid) {
-			if(zones) {
+            console.log('init map', mapZones);
+			if(mapZones) {
 				this.zones = mapZones;				
 			}
-			this.mapArray = mapGrid;
+            if(mapGrid) {
+			    this.mapArray = mapGrid;
+            }
 		},
 
 		getZoneById: function(mapZoneId) {
@@ -172,6 +175,7 @@ const map = function(settings) {
 
 // Full game hex grid factory function
 var hexGrid = function(context) {
+    //console.log('hexGrid', context);
 	var gridObj = {
 		hexTiles: [],
 		map: map({context:context}),
@@ -182,14 +186,13 @@ var hexGrid = function(context) {
 		height: 0,
 
 		init: function(mapArray) {
-			//console.log('hexGrid init, initialising map', mapArray);
+			//console.log('hexGrid init, initialising map on canvas ', this.context.canvas);
 			this.map.context = this.context;
 			this.map.grid = this;
 			this.map.init(null, mapArray);
 
-			var canvas = $(context.canvas);
-			this.width = parseInt(canvas.prop('width'));
-			this.height = parseInt(canvas.prop('height'));
+			this.width = parseInt(context.canvas.width);
+			this.height = parseInt(context.canvas.height);
 
 			var hyp = Math.pow(this.gridSize, 2);
 			var base = Math.pow(this.gridSize/2, 2);
@@ -268,11 +271,13 @@ var hexGrid = function(context) {
 
 			for(var col = startCol; col < endCol; col++) {
 				for(var row = startRow; row <= endRow; row++) {
-					var currTile = this.hexTiles[col][row];
-					currTile.init();
-					if(currTile.zoneId) {
-						zone = currTile.zoneId;
-					}
+                    if(this.hexTiles && this.hexTiles.length < col && this.hexTiles[col].length < row) {
+                        var currTile = this.hexTiles[col][row];
+                        currTile.init();
+                        if(currTile.zoneId) {
+                            zone = currTile.zoneId;
+                        }
+                    }
 				}
 			}
 			if(zone !== null) {
@@ -286,7 +291,12 @@ var hexGrid = function(context) {
 		},
 
 		isTileOnMap: function(hexTile) {
-			return (this.map.mapArray[hexTile.q][hexTile.r] != null);
+            var result = hexTile && this.map && this.map.mapArray &&
+                this.map.mapArray.length > hexTile.q &&
+                this.map.mapArray[hexTile.q].length > hexTile.r &&
+                this.map.mapArray[hexTile.q][hexTile.r];
+			//return (this.map.mapArray[hexTile.q][hexTile.r] != null);
+            return result;
 		},
 
 		isTileInZone: function(hexTile) {
@@ -319,9 +329,9 @@ var mapZone = function(settings) {
 			console.log('mapZone init', this.image);
 
 			var zone = this;
-			$(this.image).on('load', function() {
-				zone.drawBackgroundImage();
-			});
+            this.image.addEventListener('load', function() {
+                zone.drawBackgroundImage();
+            });
 		},
 
 		drawBackgroundImage() {
@@ -338,5 +348,6 @@ var mapZone = function(settings) {
 
 	return zoneObj;
 }
+
 
 export { hexGrid };

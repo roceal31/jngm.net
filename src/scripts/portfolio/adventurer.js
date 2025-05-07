@@ -17,7 +17,7 @@ const adventurer = function(settings) {
 
 		init: function() {
 			this.image = new Image();
-			this.image.src = '/slice/images/adventurer-sprite.png';
+			this.image.src = '/images/adventurer-sprite.png';
 			var thisAdventurer = this;
 			this.screenCoords = this.calculateScreenPosition(this.position);
 			this.image.onload = function() {

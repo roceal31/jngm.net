@@ -3,6 +3,8 @@ import { hexGrid } from "./map";
 
 const game = {
     loader: null,
+    context: null,
+    currentGame: null,
     // Main game  object factory function
     createGame: function (settings) {
         var gameObj = {
@@ -13,16 +15,17 @@ const game = {
             context: settings.context,
 
             init: function (initMessage, mapArray) {
-                this.console = $('#game-console');
-                this.log = $('#game-log');
-                this.log.html('<p>' + initMessage + '</p>');
+                //console.log('init game with context', this.context);
+                this.console = document.querySelector('#game-console');
+                this.log = document.querySelector('#game-log');
+                this.log.innerHtml = '<p>' + initMessage + '</p>';
 
-                this.grid = hexGrid(context);
+                this.grid = hexGrid( this.context );
                 this.grid.init(mapArray);
 
                 this.adventurer = adventurer({
                     context: this.context,
-                    position: this.grid.hexTiles[39][23],
+                    position: this.grid.hexTiles[20][5],
                     grid: this.grid,
                 });
                 this.adventurer.init();
@@ -45,53 +48,44 @@ const game = {
         return gameObj;
     },
 
-    loadGame: function () {
-        console.log('TODO: fix loadGame()');
-        /*	jQuery.get({
-                url: '/slice/js/mapArray.json',
-                dataType: 'json',
-                success: handleMapLoad
-            });
-            $(loader).hide('scale', 600, function() {
-                $(document).off('keypress', handleLoadingKeypress);
-                $(document).off('keydown', handleLoadingKeypress);
-            });
-        */
-
+    loadGame: async function () {
+        this.loader.style.display = 'none';
+        document.documentElement.removeEventListener('keydown', this.handleLoadingKeypress);
+        await loadMapFile();
     },
 
-    initGame: function () {
+    initGame: function (context) {
         this.loader = document.querySelector('#loading-screen');
+        this.context = context;
         if (this.loader && !this.loader.checkVisibility()) {
             this.loader.style.display = 'block';
-            document.documentElement.addEventListener('keypress', this.handleLoadingKeypress);
             document.documentElement.addEventListener('keydown', this.handleLoadingKeypress);
         }
     },
 
     initScene: function (mapArray) {
         //console.log('initScene', mapArray);
-        currentGame = createGame({
-            context: context
-    
+        this.context.canvas.style.display = 'block';
+        this.currentGame = this.createGame({
+            context: this.context
         });
     
-        currentGame.init('You find yourself standing at a dusty crossroads. Five paths '+
+        this.currentGame.init('You find yourself standing at a dusty crossroads. Five paths '+
             'stretch away into the distance. You suppose you must choose a direction ' +
             'and start moving. Adventure isn\'t going to find itself!', mapArray);
-    
-        $(document).on('keypress', handleGameKeypress);
-        $(document).on('keydown', handleGameKeypress);
-    
-        gameLoop();
+        
+        document.documentElement.addEventListener('keydown', this.handleGameKeypress);    
+        this.gameLoop();
     },
     
     gameLoop: function gameLoop() {
-        currentGame.updateGame();
-        requestAnimFrame(gameLoop);
+        if(game.currentGame) {
+            game.currentGame.updateGame();
+            window.requestAnimationFrame(game.gameLoop);
+        }
     },
 
-    handleLoadingKeypress: function(eventObject) {
+    handleLoadingKeypress: async function(eventObject) {
         console.log('handleLoadingKeypress', eventObject);
         var key = eventObject.which;
     
@@ -100,7 +94,7 @@ const game = {
         }
     
         if(key === 13) {
-            game.loadGame();
+            await game.loadGame();
         }
     },
 
@@ -113,23 +107,38 @@ const game = {
     
         if(key === 38) {
             // Move up
-            currentGame.adventurer.move(2);
+            game.currentGame.adventurer.move(2);
         }
     
         if(key === 40) {
             // Move down
-            currentGame.adventurer.move(0);
+            game.currentGame.adventurer.move(0);
         }
     
         if(key === 37) {
             // Move left
-            currentGame.adventurer.move(1);
+            game.currentGame.adventurer.move(1);
         }
     
         if(key === 39) {
             // Move right
-            currentGame.adventurer.move(3);
+            game.currentGame.adventurer.move(3);
         }
     }
 }
+
+let loadMapFile = async function() {
+    let response = await fetch('/assets/map.json');
+    if(response.status == 200) {
+        var json = await response.json();
+        handleMapLoad(json);
+    }
+}
+
+
+let handleMapLoad = function(jsonData) {
+    console.log('handleMapLoad', jsonData);
+    game.initScene(jsonData);
+}
+
 export { game };
