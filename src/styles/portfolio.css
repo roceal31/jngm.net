@@ -1,0 +1,271 @@
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'); /* Temporarily retain old bootstrap styles */
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono'); /* Temporarily retain original font */
+body {
+    font-family: 'Share Tech Mono' !important;
+    padding-top: 45px;
+    background:#3DA600;
+    /*color:#FFFFFF;*/
+    position: relative;
+  }
+  
+  h1 {
+    margin:0 0 1em;
+    text-align: center;
+    color:#fff;
+  }
+  
+  h2 {
+    font-size:1.7em;
+    line-height:1.7em;
+  }
+  
+  #content-wrapper {
+    padding:0 50px;
+  }
+  
+  #content-wrapper section>dl,
+  #content-wrapper section>ul {
+    margin:0;
+    padding:0;
+  }
+  
+  #content-wrapper section dl dt {
+    font-weight:bold;
+  }
+  
+  #content-wrapper .row {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+  }
+  
+  #loading-screen {
+    border:4px ridge #FFD479;
+    border-radius:4px;
+    display: none;
+  }
+  
+  #game-map {
+    display: none;
+    min-width:1400px;
+    min-height:800px;
+  }
+  
+  #game-console {
+    position: absolute;
+    width: 250px;
+    min-height: 250px;
+    top: 65px;
+    left: 25px;
+  }
+  
+  #game-console .panel-body {
+    display:flex;
+    flex-flow:row wrap;
+  }
+  
+  #game-console h1 {
+    font-size:1.2em;
+    color:inherit;
+    padding:4px 0;
+    margin:0;
+  }
+  
+  #game-console .panel-body > div {
+    flex:1 0 50%;
+    border:1px dotted #5E5E5E;
+  }
+  
+  #game-console .adventurer-stats .glyphicon-heart {
+    color:#CC4511;
+  }
+  
+  #game-log {
+    height:120px;
+    overflow-y:scroll;
+  }
+  
+  #game-log::-webkit-scrollbar {
+    width:8px;
+  }
+  
+  #game-log::-webkit-scrollbar-track {
+    background-color: #EFEFEF;
+    border:1px solid #1D8600;
+  }
+  
+  #game-log::-webkit-scrollbar-thumb {
+      background: #3DA600;
+  }
+  
+  #game-console .game-messages #game-log p:before {
+    content:"> ";
+  }
+  
+  #loading-screen .panel-body {
+    display:flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #loading-screen .panel-body > div.title-text {
+    flex: 1 1 100%;
+    align-content: center;
+    text-align: center;
+  }
+  
+  #loading-screen pre {
+    background-color: transparent;
+    border:0 none;
+    display:inline-block;
+  }
+  
+  #loading-screen .loading-text {
+    width:25%;
+    padding:15px;
+    margin:0 auto;
+    background-color:#efefef;
+    text-align:center;
+  }
+  
+  @keyframes loading {
+      0%   { background-position: 0 0; }
+      25%  { background-position: 0 100%; }
+      50%  { background-position: 100% 0; }
+      75%  { background-position: 100% 100%; }
+  }
+  
+  #loading-screen .loading {
+    width:32px;
+    height:32px;
+    background:url('../images/adventurer-sprite.gif') no-repeat;
+    margin:10px auto;
+    animation: loading 12s steps(1, end) infinite;
+  }
+  
+  .page-header {
+    border:none;
+    margin:0;
+  }
+  
+  .panel {
+    border:none;
+  }
+  
+  #section-wrapper section {
+    border:4px ridge #FFD479;
+    border-radius:4px;
+    background-color:#ffffff;
+    width:100%;
+  }
+  
+  #section-wrapper > div {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;  
+  }
+  
+  #resume-navbar {
+    background-color:#ffffff;
+    min-height:auto;
+    border:0 ridge #FFD479;
+    border-width:0 0 4px;
+    border-radius: 4px;
+  }
+  
+  #resume-navbar .nav-pills>li.active>a {
+    background-color:#008F00;
+  }
+  
+  section h2 {
+    margin-top:0;
+  }
+  
+  section#details div.panel-heading {
+    position:relative;
+  }
+  section#details h2::before {
+    content:" ";
+    background:transparent url("../images/8bitportrait.png") no-repeat;
+    width:150px;
+    height:150px;
+    display:block;
+    position:absolute;
+    top:60px;
+    left:15px;
+  }
+  
+  section#details dl {
+    display:flex;
+    flex-flow:row wrap;
+  }
+  
+  section#details dl.wide {
+    clear:both;
+    border-top:1px solid #666666;
+  }
+  
+  section#details dl dt {
+    flex:1 0 40%;
+    margin:0;
+    padding:1% 0;
+    border-bottom:1px solid #666666;
+  }
+  
+  section#details dl dd {
+    flex:3 0 60%;
+    margin:0;
+    padding:1% 0;
+    border-bottom:1px solid #666666;
+  }
+  
+  section#details dt:last-of-type,
+  section#details dd:last-child {
+    border-width:0;
+  }
+  
+  .minion,
+  .familiar {
+    width:75px;
+    height:75px;
+    border:4px ridge #5E5E5E;
+    border-radius: 3px;
+    display:inline-block;
+    margin: 0 5px;
+  }
+  
+  #loki {
+    background:transparent url("../images/loki.png") no-repeat;
+  }
+  
+  .ui-tooltip {
+    color:#000;
+    background-color:#fff;
+    border:2px solid green;
+    width:150px;
+    padding:15px;
+  }
+  
+  section#skills div.panel-body>ul {
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    list-style:none;
+  }
+  
+  section#skills div.panel-body>ul>li {
+    font-weight:bold;
+    flex:1 0 50%;
+  }
+  
+  section#skills ul ul {
+    list-style: disc;
+    margin:.7em 0;
+  }
+  
+  section#skills ul ul li {
+    font-weight:normal;
+  }
