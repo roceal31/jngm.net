@@ -87,7 +87,6 @@ const game = {
     },
 
     initScene: function (mapZones, mapArray) {
-        console.log('initScene');
         this.currentGame = this.createGame({
             context: this.context
         });

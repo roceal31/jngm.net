@@ -126,17 +126,8 @@ const map = function(settings) {
 		grid: settings.grid,
 		
 		//zones array elements: see mapZone factory function
-		 
-		zones: [
-			mapZone({
-				id: 'forest',
-				context: settings.context,
-				title: 'The Pursuant Forest',
-				logMessage: 'Forest blah blah blah lorem ipsum dolor sit amet.',
-				image: '/images/forest-sprite.png',
-				imageCoords: [420,24]
-			})
-		],
+		zones: [],
+
 		/*
 		   Map array elements:
 		     - null = empty space on the grid, default hexTile
@@ -148,7 +139,16 @@ const map = function(settings) {
 		init: function(mapZones, mapGrid) {
             console.log('init map', mapZones);
 			if(mapZones) {
-				this.zones = mapZones;				
+				this.zones = mapZones.map(zData => {
+					return mapZone({
+						id: zData.id,
+						context: settings.context,
+						title: zData.title,
+						logMessage: zData.logMessage,
+						image: zData.image,
+						imageCoords: zData.imageCoords
+					});
+				});;				
 			}
             if(mapGrid) {
 			    this.mapArray = mapGrid;
@@ -171,7 +171,7 @@ const map = function(settings) {
 		},
 	};
 
-	console.log('map factory built', mapObj);
+	//console.log('map factory built', mapObj);
 	return mapObj;
 }
 
@@ -283,14 +283,13 @@ var hexGrid = function(context) {
                         currTile.init();
                         if(currTile.zoneId) {
                             zone = currTile.zoneId;
-                        }
+							if(zone !== null) {
+								this.refreshZone(zone);
+							}
+						}
                     }
 				}
 			}
-			/*
-			if(zone !== null) {
-				this.refreshZone(zone);
-			}*/
 		},
 
 		refreshZone: function(zoneId) {
@@ -356,6 +355,5 @@ var mapZone = function(settings) {
 
 	return zoneObj;
 }
-
 
 export { hexGrid };

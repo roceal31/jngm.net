@@ -3,7 +3,9 @@
 		{
 			"id": "forest",
 			"title": "The Pursuant Forest",
-			"logMessage": "Forest blah blah blah lorem ipsum dolor sit amet."
+			"logMessage": "Forest blah blah blah lorem ipsum dolor sit amet.",
+			"image": "/images/forest-sprite.png",
+			"imageCoords": [420,24]
 		}
 	],
 	"mapArray": [null,
