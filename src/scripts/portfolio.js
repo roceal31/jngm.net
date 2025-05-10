@@ -37,6 +37,6 @@ var ready = (callback) => {
   
 ready(async () => { 
     initTooltips();
-    await game.initGame(context, 1);
+    await game.initGame(context, 0);
 });
   
