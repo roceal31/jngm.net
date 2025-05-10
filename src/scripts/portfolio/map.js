@@ -136,7 +136,7 @@ const map = function(settings) {
         
 		mapArray: [],
 
-		init: function(mapZones, mapGrid) {
+		init: function(mapZones, mapGrid, callback) {
             console.log('init map', mapZones);
 			if(mapZones) {
 				this.zones = mapZones.map(zData => {
@@ -146,7 +146,8 @@ const map = function(settings) {
 						title: zData.title,
 						logMessage: zData.logMessage,
 						image: zData.image,
-						imageCoords: zData.imageCoords
+						imageCoords: zData.imageCoords,
+						callback: callback
 					});
 				});;				
 			}
@@ -187,11 +188,11 @@ var hexGrid = function(context) {
 		width: 0,
 		height: 0,
 
-		init: function(mapZones, mapArray) {
+		init: function(mapZones, mapArray, gameLogCallback) {
 			//console.log('hexGrid init, initialising map on canvas ', this.context.canvas);
 			this.map.context = this.context;
 			this.map.grid = this;
-			this.map.init(mapZones, mapArray);
+			this.map.init(mapZones, mapArray, gameLogCallback);
 
 			this.width = parseInt(context.canvas.width);
 			this.height = parseInt(context.canvas.height);
@@ -282,13 +283,15 @@ var hexGrid = function(context) {
                         var currTile = this.hexTiles[col][row];
                         currTile.init();
                         if(currTile.zoneId) {
-                            zone = currTile.zoneId;
-							if(zone !== null) {
-								this.refreshZone(zone);
-							}
+							this.refreshZone(currTile.zoneId);
 						}
                     }
 				}
+			}
+
+			if(startTile.zoneId) {
+				var zoneObj = this.map.getZoneById(startTile.zoneId);
+				zoneObj.checkStateEvent();
 			}
 		},
 
@@ -328,7 +331,10 @@ var mapZone = function(settings) {
 		image: {},
 		imageCoords: settings.imageCoords || [],
 		monster: {},
-		state: 0,
+		state: {
+			adventurerEntered: 0
+		},
+		callback: settings.callback,
 
 		init: function(x, y) {
 			this.image = new Image();
@@ -349,7 +355,16 @@ var mapZone = function(settings) {
 		},
 
 		drawTitle: function() {
-			// TODO
+			// TODO: Remember what this function was for? Was I going to label each area with a title also?
+		},
+
+		checkStateEvent: function() {
+			if(!this.state.adventurerEntered) {
+				if(this.callback) {
+					this.callback(this.logMessage);
+				}
+				this.state.adventurerEntered = 1;
+			}
 		}
 	};
 
