@@ -25,7 +25,7 @@ const game = {
                 //console.log('init game with context', this.context);
                 this.console = document.querySelector('#game-console');
                 this.log = document.querySelector('#game-log');
-                this.log.innerHtml += '<p>' + initMessage + '</p>';
+                this.logMessage(initMessage);
 
                 this.grid = hexGrid( this.context );
                 this.grid.init(mapZones, mapArray);
@@ -39,8 +39,7 @@ const game = {
             },
 
             logMessage: function (message) {
-                var currentLog = this.log.html();
-                this.log.html(currentLog + '<p>' + message + '</p>');
+                this.log.innerHTML += `<p>${message}</p>`;
             },
 
             updateGame: function () {

@@ -4,8 +4,8 @@ const adventurer = function(settings) {
 		grid: settings.grid,
 		frameIndex: 0,
 		tickCount: 0,
-		ticksPerFrame: settings.ticksPerFrame || 8,
-		ticksPerMove: settings.ticksPerMove || 4,
+		ticksPerFrame: settings.ticksPerFrame || 6,
+		ticksPerMove: settings.ticksPerMove || 3,
 		isMoving: false,
 		direction: settings.direction || 0, // 0 = down, 1 = left, 2 = up, 3 = right
 		movingTo: {}, // hex tile to move to
