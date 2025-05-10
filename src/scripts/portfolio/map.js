@@ -5,6 +5,7 @@ const hexTile = function(settings) {
 		context: settings.context,
 		q: settings.q || 0,
 		r: settings.r || 0,
+		debugMode: settings.debugMode,
 		startX: settings.x,
 		startY: settings.y,
 		screen: [],
@@ -20,7 +21,7 @@ const hexTile = function(settings) {
 		init: function() {
 			this.calculateHexHeight();
 			this.drawHex(this.startX, this.startY);
-			if(this.context.debugMode) {
+			if(this.debugMode) {
 				this.drawCoords(this.startX, this.startY, this.q, this.r);
 			}
 			this.screen = hexTileObj.center();
@@ -232,6 +233,7 @@ var hexGrid = function(context) {
 					//console.log('buildHexGrid', mapConfig);
 					var currentTile = hexTile({
 						context: this.context,
+						debugMode: 0,
 						q: q,
 						r: r,
 						x: currentX,
@@ -260,7 +262,9 @@ var hexGrid = function(context) {
 			for(var i = 0; i < mapZoneCount; i++) {
 				var zone = this.map.zones[i];
 				console.log('Drawing zone', zone);
-				zone.init(420, 24);
+				if(zone.init) {
+					zone.init(420, 24);
+				}
 			}
 		},
 
@@ -273,7 +277,8 @@ var hexGrid = function(context) {
 
 			for(var col = startCol; col < endCol; col++) {
 				for(var row = startRow; row <= endRow; row++) {
-                    if(this.hexTiles && this.hexTiles.length < col && this.hexTiles[col].length < row) {
+					let isCoordsInGrid = (this.hexTiles.length > col) && (this.hexTiles[col].length > row);
+                    if(isCoordsInGrid) {
                         var currTile = this.hexTiles[col][row];
                         currTile.init();
                         if(currTile.zoneId) {
@@ -282,9 +287,10 @@ var hexGrid = function(context) {
                     }
 				}
 			}
+			/*
 			if(zone !== null) {
 				this.refreshZone(zone);
-			}
+			}*/
 		},
 
 		refreshZone: function(zoneId) {

@@ -4,8 +4,9 @@ import { game } from "./portfolio/game";
 var canvas = document.getElementById('game-map');
 console.log('Canvas loaded', canvas);
 
-canvas.setAttribute('width', 800);
-canvas.setAttribute('height', 600);
+// TODO: make me dynamic again based on CSS min-width attribute
+canvas.setAttribute('width', 1400);
+canvas.setAttribute('height', 800);
 var context = canvas ? canvas.getContext('2d') : null;
 
 function initTooltips() {
@@ -34,8 +35,8 @@ var ready = (callback) => {
     else document.addEventListener("DOMContentLoaded", callback);
 }
   
-ready(() => { 
+ready(async () => { 
     initTooltips();
-    game.initGame(context);
+    await game.initGame(context, 1);
 });
   

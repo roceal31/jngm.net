@@ -1,10 +1,16 @@
 import { adventurer } from "./adventurer";
 import { hexGrid } from "./map";
 
+const gameMode = {
+    showLoader: 0,
+    showMap: 1,
+};
+
 const game = {
     loader: null,
     context: null,
     currentGame: null,
+    mode: gameMode.showLoader,
 
     // Main game  object factory function
     createGame: function (settings) {
@@ -26,7 +32,7 @@ const game = {
 
                 this.adventurer = adventurer({
                     context: this.context,
-                    position: this.grid.hexTiles[20][5],
+                    position: this.grid.hexTiles[39][23],
                     grid: this.grid,
                 });
                 this.adventurer.init();
@@ -49,24 +55,40 @@ const game = {
         return gameObj;
     },
 
-    loadGame: async function () {
-        this.loader.style.display = 'none';
-        document.documentElement.removeEventListener('keydown', this.handleLoadingKeypress);
-        await loadMapFile();
-    },
-
-    initGame: function (context) {
+    initGame: async function (context, mode) {
+        console.log('initGame');
+        this.mode = mode;
         this.loader = document.querySelector('#loading-screen');
         this.context = context;
-        if (this.loader && !this.loader.checkVisibility()) {
-            this.loader.style.display = 'block';
-            document.documentElement.addEventListener('keydown', this.handleLoadingKeypress);
+        await this.configureGameMode();
+    },
+
+    configureGameMode: async function() {
+        console.log(`configuring game for mode ${this.mode}`);
+        if(this.loader && this.context && this.context.canvas) {
+            if(this.mode === gameMode.showLoader) {
+                console.log('Showing game loader');
+                this.loader.style.display = 'block';
+                this.context.canvas.style.display = 'none';
+                document.documentElement.addEventListener('keydown', this.handleLoadingKeypress);
+                return;
+            }
+
+            if(this.mode === gameMode.showMap) {
+                console.log('Showing game map');
+                this.context.canvas.style.display = 'block';
+                this.loader.style.display = 'none';
+                document.documentElement.removeEventListener('keydown', this.handleLoadingKeypress);
+                await loadMapFile();
+                return;
+            }
         }
+
+        console.warn('Invalid game mode, unable to proceed');
     },
 
     initScene: function (mapZones, mapArray) {
-        //console.log('initScene', mapArray);
-        this.context.canvas.style.display = 'block';
+        console.log('initScene');
         this.currentGame = this.createGame({
             context: this.context
         });
@@ -95,7 +117,8 @@ const game = {
         }
     
         if(key === 13) {
-            await game.loadGame();
+            game.mode = gameMode.showMap;
+            game.configureGameMode();
         }
     },
 
