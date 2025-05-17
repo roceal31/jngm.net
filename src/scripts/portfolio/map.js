@@ -144,6 +144,7 @@ const map = function(settings) {
 						id: zData.id,
 						context: settings.context,
 						title: zData.title,
+						titleImageSrc: zData.titleImageSrc,
 						logMessage: zData.logMessage,
 						image: zData.image,
 						imageCoords: zData.imageCoords,
@@ -298,6 +299,7 @@ var hexGrid = function(context) {
 		refreshZone: function(zoneId) {
 			var zone = this.map.getZoneById(zoneId);
 			zone.drawBackgroundImage();
+			zone.drawTitle()
 		},
 
 		isTileOnMap: function(hexTile) {
@@ -330,6 +332,9 @@ var mapZone = function(settings) {
 		imagePath: settings.image || '',
 		image: {},
 		imageCoords: settings.imageCoords || [],
+		label: {},
+		titleImage: {},
+		titleImageSrc: settings.titleImageSrc || '',
 		monster: {},
 		state: {
 			adventurerEntered: 0
@@ -339,12 +344,23 @@ var mapZone = function(settings) {
 		init: function(x, y) {
 			this.image = new Image();
 			this.image.src = this.imagePath;
-			console.log('mapZone init', this.image);
 
 			var zone = this;
             this.image.addEventListener('load', function() {
                 zone.drawBackgroundImage();
             });
+
+			this.label = new Image();
+			this.label.src = '/images/label.png';
+			this.label.addEventListener('load', function() {
+				zone.drawTitle();
+			});
+
+			this.titleImage = new Image();
+			this.titleImage.src = this.titleImageSrc;
+			this.titleImage.addEventListener('load', function() {
+				zone.drawTitle();
+			});
 		},
 
 		drawBackgroundImage() {
@@ -355,7 +371,17 @@ var mapZone = function(settings) {
 		},
 
 		drawTitle: function() {
-			// TODO: Remember what this function was for? Was I going to label each area with a title also?
+			let top = this.imageCoords[1] + this.image.height;
+			let left = this.imageCoords[0] + 20;
+
+			if(this.context && this.label.src) {
+				//console.log('check image coords', this.image.height);
+				this.context.drawImage(this.label, left, top);
+			}
+
+			if(this.context && this.titleImageSrc) {
+				this.context.drawImage(this.titleImage, left, top + 5);
+			}
 		},
 
 		checkStateEvent: function() {
