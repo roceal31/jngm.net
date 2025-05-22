@@ -25,10 +25,10 @@ const game = {
                 //console.log('init game with context', this.context);
                 this.console = document.querySelector('#game-console');
                 this.log = document.querySelector('#game-log');
-                this.log.innerHtml += '<p>' + initMessage + '</p>';
+                this.logMessage(initMessage);
 
                 this.grid = hexGrid( this.context );
-                this.grid.init(mapZones, mapArray);
+                this.grid.init(mapZones, mapArray, this.zoneCallback);
 
                 this.adventurer = adventurer({
                     context: this.context,
@@ -39,8 +39,30 @@ const game = {
             },
 
             logMessage: function (message) {
-                var currentLog = this.log.html();
-                this.log.html(currentLog + '<p>' + message + '</p>');
+                this.log.innerHTML += `<p>${message}</p>`;
+                this.gameLogScrollJump();
+            },
+
+            gameLogScrollJump: function() {
+                // TODO: see if we can make this less annoying or put it somewhere more generic
+                var previousNodes = this.log.childNodes.length - 1;
+                if(previousNodes > 0) {
+                    var nodeHeights = new Array(previousNodes);
+                    this.log.childNodes.forEach((currentNode, currentIndex, nodeListObj) => {
+                        if(currentIndex <= previousNodes) {
+                            nodeHeights[currentIndex] = currentNode.clientHeight;
+                        }
+                    });
+                    var scrollAmount = nodeHeights.reduce((heightTotal, current) => {
+                        return heightTotal + current;
+                    });
+                    
+                    this.log.scroll(0, scrollAmount);
+                }
+            },
+
+            zoneCallback: function (message) {
+                game.currentGame.logMessage(message);
             },
 
             updateGame: function () {
@@ -88,7 +110,6 @@ const game = {
     },
 
     initScene: function (mapZones, mapArray) {
-        console.log('initScene');
         this.currentGame = this.createGame({
             context: this.context
         });
