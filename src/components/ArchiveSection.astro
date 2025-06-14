@@ -1,4 +1,6 @@
 ---
+import { sortPostsByDateMostRecentFirst } from "../scripts/blog";
+
 const {year, posts} = Astro.props
 const formatDate = (dateTimeObj: Date) => {
 	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -9,4 +11,4 @@ const formatDate = (dateTimeObj: Date) => {
 ---
 
 <h3>{year}</h3>
-{posts.map((post: any) => <p>{formatDate(post.data.pubDate)} <a href={`/posts/${post.id}/`}>{post.data.title}</a></p>)}
+{posts.sort((pa: any, pb: any) => sortPostsByDateMostRecentFirst(pa, pb)).map((post: any) => <p>{formatDate(post.data.pubDate)} <a href={`/posts/${post.id}/`}>{post.data.title}</a></p>)}
