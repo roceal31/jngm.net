@@ -3,6 +3,7 @@ import ArjLogBaseLayout from "../layouts/ArjLogBaseLayout.astro";
 import ArchiveSection from "../components/ArchiveSection.astro";
 import { getCollection } from "astro:content";
 
+
 const blogPosts = await getCollection("blog");
 const blogsByYear = Object.groupBy(blogPosts, ( {data} ) => data.pubDate.getFullYear());
 
