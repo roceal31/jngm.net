@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono'); /* Temporarily retain original font */
 @import "tailwindcss";
 
-body {
-    font-family: 'Share Tech Mono' !important;
-    padding-top: 45px;
-    background:#3DA600;
-    /*color:#FFFFFF;*/
-    position: relative;
-  }
+@theme {
+  --color-primary-green: #3DA600;
+  --font-share-tech: 'Share Tech Mono';
+  --default-font-family: 'Share Tech Mono';
+}
+
   
   h1 {
     margin:0 0 1em;

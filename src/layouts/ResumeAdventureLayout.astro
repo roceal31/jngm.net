@@ -7,23 +7,25 @@ import '../styles/portfolio.css';
 	<head>
 		<title>Online R&eacute;sum&eacute;: Andrea R James</title>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
-	<body>
+	<body class="bg-primary-green">
+		<header>
+			<nav class="bg-white">
+				<ul class="flex gap-4 pt-2 pl-2 pr-2">
+					<li class="pt-2 pr-2 pb-2 pl-2 bg-primary-green rounded-t-md"><a href="/portfolio/play">Play</a></li>
+					<li class="pt-2 pr-2 pb-2 pl-2"><a href="/portfolio/goals">Career Goals &amp; Ideals</a></li>
+					<li class="pt-2 pr-2 pb-2 pl-2"><a href="/portfolio/skills">Skills</a></li>
+					<li class="pt-2 pr-2 pb-2 pl-2"><a href="/portfolio/employment">Employment History</a></li>
+					<li class="pt-2 pr-2 pb-2 pl-2"><a href="/portfolio/education">Education &amp; Training</a></li>
+					<li class="pt-2 pr-2 pb-2 pl-2"><a href="/portfolio/volunteer">Volunteering / Personal Projects</a></li>
+					<li class="pt-2 pr-2 pb-2 pl-2"><a href="#print"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg></a></li>
+					<li class="pt-2 pr-2 pb-2 pl-2"><a href="#download"><span class="glyphicon glyphicon-download-alt"></span></a></li>
+				</ul>
+			</nav>
+		</header>
 		<main>
-			<div id="resume">
-				<nav class="navbar navbar-default navbar-fixed-top" id="resume-navbar">
-				    <ul class="nav nav-pills" role="tablist">
-				      <li role="presentation"><a href="/portfolio/goals" aria-controls="goals" role="tab" data-toggle="tab" data-key="1">Career Goals &amp; Ideals</a></li>
-				      <li role="presentation"><a href="/portfolio/skills" aria-controls="skills" role="tab" data-toggle="tab" data-key="2">Skills</a></li>
-				      <li role="presentation"><a href="/portfolio/employment" aria-controls="employment" role="tab" data-toggle="tab" data-key="3">Employment History</a></li>
-				      <li role="presentation"><a href="/portfolio/education" aria-controls="education" role="tab" data-toggle="tab" data-key="4">Education &amp; Training</a></li>
-				      <li role="presentation"><a href="/portfolio/volunteer" aria-controls="volunteer" role="tab" data-toggle="tab" data-key="5">Volunteering / Personal Projects</a></li>
-				      <li role="presentation"><a href="#print"><span class="glyphicon glyphicon-print"></span></a></li>
-				      <li role="presentation"><a href="#download"><span class="glyphicon glyphicon-download-alt"></span></a></li>
-				    </ul>
-				</nav>
 				<slot />
-			</div>
 		</main>
 		<script src="../scripts/portfolio.js"></script>
 	</body>
