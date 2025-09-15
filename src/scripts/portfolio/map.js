@@ -126,17 +126,8 @@ const map = function(settings) {
 		grid: settings.grid,
 		
 		//zones array elements: see mapZone factory function
-		 
-		zones: [
-			mapZone({
-				id: 'forest',
-				context: settings.context,
-				title: 'The Pursuant Forest',
-				logMessage: 'Forest blah blah blah lorem ipsum dolor sit amet.',
-				image: '/images/forest-sprite.png',
-				imageCoords: [420,24]
-			})
-		],
+		zones: [],
+
 		/*
 		   Map array elements:
 		     - null = empty space on the grid, default hexTile
@@ -145,10 +136,21 @@ const map = function(settings) {
         
 		mapArray: [],
 
-		init: function(mapZones, mapGrid) {
+		init: function(mapZones, mapGrid, callback) {
             console.log('init map', mapZones);
 			if(mapZones) {
-				this.zones = mapZones;				
+				this.zones = mapZones.map(zData => {
+					return mapZone({
+						id: zData.id,
+						context: settings.context,
+						title: zData.title,
+						titleImageSrc: zData.titleImageSrc,
+						logMessage: zData.logMessage,
+						image: zData.image,
+						imageCoords: zData.imageCoords,
+						callback: callback
+					});
+				});;				
 			}
             if(mapGrid) {
 			    this.mapArray = mapGrid;
@@ -171,7 +173,7 @@ const map = function(settings) {
 		},
 	};
 
-	console.log('map factory built', mapObj);
+	//console.log('map factory built', mapObj);
 	return mapObj;
 }
 
@@ -187,11 +189,11 @@ var hexGrid = function(context) {
 		width: 0,
 		height: 0,
 
-		init: function(mapZones, mapArray) {
+		init: function(mapZones, mapArray, gameLogCallback) {
 			//console.log('hexGrid init, initialising map on canvas ', this.context.canvas);
 			this.map.context = this.context;
 			this.map.grid = this;
-			this.map.init(mapZones, mapArray);
+			this.map.init(mapZones, mapArray, gameLogCallback);
 
 			this.width = parseInt(context.canvas.width);
 			this.height = parseInt(context.canvas.height);
@@ -282,20 +284,22 @@ var hexGrid = function(context) {
                         var currTile = this.hexTiles[col][row];
                         currTile.init();
                         if(currTile.zoneId) {
-                            zone = currTile.zoneId;
-                        }
+							this.refreshZone(currTile.zoneId);
+						}
                     }
 				}
 			}
-			/*
-			if(zone !== null) {
-				this.refreshZone(zone);
-			}*/
+
+			if(startTile.zoneId) {
+				var zoneObj = this.map.getZoneById(startTile.zoneId);
+				zoneObj.checkStateEvent();
+			}
 		},
 
 		refreshZone: function(zoneId) {
 			var zone = this.map.getZoneById(zoneId);
 			zone.drawBackgroundImage();
+			zone.drawTitle()
 		},
 
 		isTileOnMap: function(hexTile) {
@@ -328,18 +332,35 @@ var mapZone = function(settings) {
 		imagePath: settings.image || '',
 		image: {},
 		imageCoords: settings.imageCoords || [],
+		label: {},
+		titleImage: {},
+		titleImageSrc: settings.titleImageSrc || '',
 		monster: {},
-		state: 0,
+		state: {
+			adventurerEntered: 0
+		},
+		callback: settings.callback,
 
 		init: function(x, y) {
 			this.image = new Image();
 			this.image.src = this.imagePath;
-			console.log('mapZone init', this.image);
 
 			var zone = this;
             this.image.addEventListener('load', function() {
                 zone.drawBackgroundImage();
             });
+
+			this.label = new Image();
+			this.label.src = '/images/label.png';
+			this.label.addEventListener('load', function() {
+				zone.drawTitle();
+			});
+
+			this.titleImage = new Image();
+			this.titleImage.src = this.titleImageSrc;
+			this.titleImage.addEventListener('load', function() {
+				zone.drawTitle();
+			});
 		},
 
 		drawBackgroundImage() {
@@ -350,12 +371,30 @@ var mapZone = function(settings) {
 		},
 
 		drawTitle: function() {
-			// TODO
+			let top = this.imageCoords[1] + this.image.height;
+			let left = this.imageCoords[0] + 20;
+
+			if(this.context && this.label.src) {
+				//console.log('check image coords', this.image.height);
+				this.context.drawImage(this.label, left, top);
+			}
+
+			if(this.context && this.titleImageSrc) {
+				this.context.drawImage(this.titleImage, left, top + 5);
+			}
+		},
+
+		checkStateEvent: function() {
+			if(!this.state.adventurerEntered) {
+				if(this.callback) {
+					this.callback(this.logMessage);
+				}
+				this.state.adventurerEntered = 1;
+			}
 		}
 	};
 
 	return zoneObj;
 }
-
 
 export { hexGrid };
