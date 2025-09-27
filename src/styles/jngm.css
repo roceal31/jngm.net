@@ -130,3 +130,42 @@ p.tag {
     border:1px solid #CCFFEE;
     border-radius: 0.2em;
 }
+
+form.submit-comment {
+    border-top: 1px solid #AADDCC;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #FFE;
+}
+
+form.submit-comment p {
+    font-size:smaller;
+    letter-spacing: .1em;
+}
+
+form.submit-comment section {
+    display:flex;
+    flex-flow: column nowrap;
+    margin: .5em 0;
+}
+
+form.submit-comment input[type="text"] {
+    height: 2em;
+}
+
+form.submit-comment textarea {
+    height: 6em;
+}
+
+form.submit-comment input[type="button"] {
+    padding:4px 8px;
+    background-color: #AADDCC;
+    border:1px solid #CCFFEE;
+    border-radius: 0.2em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.hidden {
+    display:none;
+}

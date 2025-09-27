@@ -1,6 +1,7 @@
 ---
 import ArjLogBaseLayout from "./ArjLogBaseLayout.astro";
 import TagList from "../components/TagList.astro";
+import CommentSection from "../components/CommentSection.astro";
 
 const { frontmatter } = Astro.props;
 
@@ -17,4 +18,5 @@ const formatDate = (dateTimeObj: Date) => {
 		<slot />
 		<TagList tags={frontmatter.tags} />
 	</article>
+	<CommentSection />
 </ArjLogBaseLayout>
