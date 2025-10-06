@@ -3,7 +3,7 @@
 title: 'Clearing the Decks'
 pubDate: 2025-10-04
 description: 'Doing some meta-thinking about my approach to problem solving and why I feel so stuck at the moment.'
-tags: ["mental-health", "life-goals"]
+tags: ["mental health", "life goals"]
 ---
 
 Some recent emotional upheaval which I won't really dig into led me to make some use of the Employee Assistance Program available to me for some free therapy sessions. Yesterday was session number two. While it hasn't been mind blowing, it's been valuable spending some time trying to take a step back and think through what's really going on, and the values alignment exercise that I recently went through did give me one small epiphany that I thought worth writing down and describing / processing a little more.
