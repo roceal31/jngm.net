@@ -1,0 +1,18 @@
+---
+import ArjLogBaseLayout from "./ArjLogBaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+
+const formatDate = (dateTimeObj: Date) => {
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	const days  = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	return `${days[dateTimeObj.getDay()]} ${dateTimeObj.getDate()} ${months[dateTimeObj.getMonth()]} ${dateTimeObj.getFullYear()}`;
+}
+---
+
+<ArjLogBaseLayout pageTitle={frontmatter.title} metaTitle={frontmatter.title}>
+	<article class="blog-post">
+		<div class="blog-pub-date">{formatDate(frontmatter.pubDate)}</div>
+		<slot />
+	</article>
+</ArjLogBaseLayout>
