@@ -4,7 +4,6 @@ import StrapiPostLayout from '../../layouts/StrapiPostLayout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('strapiBlog');
-  console.log('All strapi posts', posts);
   return posts.map(post => ({
     params: { slug: post.data.slug }, props: { post },
   }));
@@ -15,5 +14,5 @@ const { Content } = await render(post);
 ---
 
 <StrapiPostLayout frontmatter={post.data}>
-    <Content />
+  <Content />
 </StrapiPostLayout>

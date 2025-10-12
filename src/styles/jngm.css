@@ -116,6 +116,17 @@ section.blog-listing {
     letter-spacing: .1em;
 }
 
+div.blog-post-cover {
+    width: 100%;
+    height: 30vh;
+}
+img.blog-post-cover {
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    object-position: 0 75%;
+}
+
 div.tags {
     display:flex;
     flex-wrap: wrap;

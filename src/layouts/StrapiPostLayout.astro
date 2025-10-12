@@ -13,6 +13,9 @@ const formatDate = (dateTimeObj: Date) => {
 <ArjLogBaseLayout pageTitle={frontmatter.title} metaTitle={frontmatter.title}>
 	<article class="blog-post">
 		<div class="blog-pub-date">{formatDate(frontmatter.pubDate)}</div>
+		<div class="blog-post-cover">
+			<img class="blog-post-cover" src={frontmatter.coverImage} />
+		</div>
 		<slot />
 	</article>
 </ArjLogBaseLayout>

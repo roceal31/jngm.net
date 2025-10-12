@@ -1,11 +1,12 @@
 // Import the glob loader
-import type { Loader, LoaderContext} from 'astro/loaders';
+import type { Loader, LoaderContext } from 'astro/loaders';
 import { glob } from "astro/loaders";
-import { fetchArticles } from "./scripts/strapi";
+import { fetchContent, getRawBody, getImageUrl } from "./scripts/strapi";
 
 // Import utilities from `astro:content`
 import { z, defineCollection } from "astro:content";
-import type { any } from 'astro:schema';
+import { getImage } from 'astro:assets';
+
 // Define a `loader` and `schema` for each collection
 const blog = defineCollection({
     loader: glob({ pattern: '**/[^_]*.md', base: "./src/arjlog" }),
@@ -21,26 +22,30 @@ function strapiLoader(): Loader {
   return {
     name: "strapi-loader",
     // Called when updating the collection.
-    load: async (context: LoaderContext): Promise<void> => {
+    load: async (context:LoaderContext): Promise<void> => {
       // Load data and update the store
-      const articles = await fetchArticles();
-      console.log(articles);
+      const articles = await fetchContent('articles');
 
       context.store.clear();
-      articles.forEach((a: any) => {
+      for(const article of articles) {
+        const articleBody = await getRawBody(article);
+        const coverUrl = getImageUrl(article.cover);
         context.store.set({
-          id: a.slug,
+          id: article.slug,
           data: {
-            title: a.title,
-            description: a.description,
-            pubDate: new Date(a.publishedAt),
-            slug: a.slug
+            title: article.title,
+            description: article.description,
+            pubDate: new Date(article.publishedAt),
+            slug: article.slug,
+            coverImage: 'http://localhost:1337/uploads/IMG_3483_68797dd2cc.jpeg'
           },
+          body: articleBody,
           rendered: {
-            html: "<p>Stub</p>"
+            html: (await context.renderMarkdown(articleBody)).html
           }
         });
-      });
+
+      }
     },
 
     // Optionally, define the schema of an entry.
@@ -49,7 +54,8 @@ function strapiLoader(): Loader {
       title: z.string(),
       pubDate: z.date(),
       description: z.string(),
-      slug: z.string()
+      slug: z.string(),
+      coverImage: z.string()
     })
   };
 }
