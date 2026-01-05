@@ -3,7 +3,7 @@
 title: 'Spilling Out of the Jar'
 pubDate: 2025-10-23
 description: 'Thinking a bit more about overwhelm and how to make more quiet for myself.'
-tags: ["mental-health", "navel-gazing"]
+tags: ["mental health", "navel-gazing"]
 ---
 
 More than usual with a blog post, I am really not sure where this one is going. Your guess is as good as mine at this point about where exactly I'm going to end up and how much I reveal.
