@@ -7,10 +7,18 @@ import { getCollection } from "astro:content";
 const blogPosts = await getCollection("blog");
 const blogsByYear = Object.groupBy(blogPosts, ( {data} ) => data.pubDate.getFullYear());
 
+const sortArchiveYearDesc = function(aYear:string, bYear:string) {
+    if(aYear > bYear)
+        return -1;
+    if(aYear == bYear)
+        return 0;
+
+    return 1;
+}
 ---
 
 <ArjLogBaseLayout pageTitle="ARJLog - Archive" metaTitle="Archive">
     <div class="blog-archive">
-        {Object.entries(blogsByYear).map(([key, value]) => <ArchiveSection year={key} posts={value} />)}
+        {Object.entries(blogsByYear).sort(([akey], [bkey]) => { return sortArchiveYearDesc(akey, bkey)}).map(([key, value]) => <ArchiveSection year={key} posts={value} />)}
     </div>
 </ArjLogBaseLayout>
