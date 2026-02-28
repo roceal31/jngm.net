@@ -1,0 +1,24 @@
+---
+const { postId } = Astro.props;
+---
+
+<form name="submit-comment" method="post" class="submit-comment"
+      data-netlify="true" netlify-honeypot="i-am-human" action={`/posts/${postId}/`}>
+    <input type="hidden" name="postid" value={postId}>
+    <p>Add a comment (subject to review before publishing). I'm always up for
+        a legit conversation with other humans.</p>
+    <section>
+        <label for="commenter">Your Handle</label>
+        <input type="text" name="commenter">
+    </section>
+    <section>
+        <label for="comment-body">Your Thoughts</label>
+        <textarea name="comment-body"></textarea>
+    </section>
+    <input type="submit" value="Submit">
+    <p class="hidden">
+        <label>
+        Humans, leave this field intentionally blank: <input name="i-am-human" type="text" />
+        </label>
+    </p>
+</form>
