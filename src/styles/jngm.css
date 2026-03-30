@@ -130,3 +130,7 @@ p.tag {
     border:1px solid #CCFFEE;
     border-radius: 0.2em;
 }
+
+.blog-post img {
+    max-width: 95%;
+}
