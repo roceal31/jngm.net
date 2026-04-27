@@ -6,8 +6,7 @@ const postName = argv[2];
 console.log(`Creating a new post in ./src/arjlog named ${postName}.md`);
 var pubDate =  new Date();
 
-const boilerplate = `
----
+const boilerplate = `---
 title: ''
 pubDate: ${pubDate.toISOString().substring(0,10)}
 description: ''
