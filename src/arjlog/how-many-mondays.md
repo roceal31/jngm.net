@@ -2,7 +2,7 @@
 title: 'How Many Mondays'
 pubDate: 2026-08-29
 description: 'The week-by-week countdown grinds on.'
-tags: ["blather", "mental-health", "middle age"]
+tags: ["blather", "mental health", "middle age"]
 ---
 
 The checkbox on my habit tracker app says, "Write Something", an activity which I have not really been overly willing to tackle of late. It's so much easier to watch episodes of [Silicon Valley](https://youtu.be/8ZgfTarNxdY?si=ZjeCRgaxhxzg6Dp4) and play the remastered [Geneforge](https://www.spiderwebsoftware.com/geneforge/). I have entered full [countdown mode](/posts/there-is-a-season/).
