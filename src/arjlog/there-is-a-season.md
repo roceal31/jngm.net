@@ -1,7 +1,7 @@
 ---
 title: 'There is a Season'
 pubDate: 2026-08-08
-description: 'Here we go ''round the mulberry bush. Sometimes I just blindsided by things that I should expect.'
+description: 'Here we go ''round the mulberry bush. Sometimes I am just blindsided by things that I should expect.'
 tags: ["mental health", "life goals"]
 ---
 
